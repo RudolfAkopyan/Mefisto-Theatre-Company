@@ -1,0 +1,91 @@
+﻿@model Mefisto_Theatre_Company.Models.Comment
+@{
+    ViewBag.Title = "DeleteComment";
+}
+
+<h2>DeleteComment</h2>
+
+@using (Html.BeginForm("DeleteCommentConfirmed", "Moderator", new { id = Model.CommentId }, FormMethod.Post, new { id = "deleteCommentForm" }))
+{
+    @Html.AntiForgeryToken()
+    <h3>Are you sure you want to delete Comment?</h3>
+    <div>
+        <h4>Comment</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <!-- Display comment details here -->
+            <dt></dt>
+            <dd style="text-align:right; padding:2px 4px 2px 4px">
+                <a href="#" id="deleteCommentButton" class="btn btn-sm btn-success">Delete</a>
+            </dd>
+        </dl>
+    </div>
+}
+
+<!-- Modal outside the form -->
+<div class="modal fade" id="deleteCommentModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-left">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body text-center">
+                <strong>Are you sure you want to delete @Model.CommentId?</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <!-- Change the type of the button to submit -->
+                <button type="submit" class="btn btn-primary">Delete Comment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-Ks1s9gXx7r2UCj41x9u7WOMgqL3HMsB2vlGfYvesXIQ=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+HdIe+8C6OyfyK5ThrVX53uj27S4+X6+XkK1ZO/cV/q8+sk6EKpT1Q23Ze" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#deleteCommentButton').click(function () {
+                $('#deleteCommentModel').modal('show');
+            });
+
+            $('#deleteCommentForm').submit(function (e) {
+                e.preventDefault(); // Prevent default form submission
+                var form = $(this);
+                var url = form.attr('action');
+                var data = form.serialize();
+
+                // Perform AJAX POST request to delete comment
+                $.post(url, data)
+                    .done(function (response) {
+                        // Optionally handle success response
+                        window.location.href = response.redirectUrl; // Redirect to desired page after successful deletion
+                    })
+                    .fail(function (error) {
+                        // Optionally handle error
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

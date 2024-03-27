@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Mefisto_Theatre_Company.Models.Post>
+@using Mefisto_Theatre_Company.Models
+
+@{
+    ViewBag.Title = "All Posts";
+}
+<br />
+<hr />
+@foreach (var item in ViewBag.Categories)
+{
+    <b> @item.Name || </b>
+}
+<br />
+<hr />
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find Posts by Category: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<h2>All Posts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePosted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEdited)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td style="text-align:justify">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePosted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEdited)
+            </td>
+            <td>
+                <ul>
+                    @Html.ActionLink("Details", "Details", new { id = item.PostId })  
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Customer"))
+                        {
+                            @Html.ActionLink("Add Comment", "AddComment", "Customer", new { id = item.PostId }, new { @class = "nav-link" })    
+                        }
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+</table>

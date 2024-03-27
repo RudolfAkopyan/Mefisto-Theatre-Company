@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Mefisto_Theatre_Company.Models.Post>
+
+@{
+    ViewBag.Title = "ViewAllPosts";
+}
+
+<h2>ViewAllPosts</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePosted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEdited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePosted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEdited)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Posts", new { id = item.PostId }, null) |
+                @Html.ActionLink("Details", "DetailsPosts", new { id = item.PostId }) |
+                @Html.ActionLink("Delete", "DeletePost", new { id = item.PostId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Back", "Index")

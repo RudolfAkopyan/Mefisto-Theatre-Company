@@ -1,0 +1,36 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;    
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.bg-red {
+    background-color: pink !important;
+}
+
+logo {
+    max-width: 10%; /* Ensure the logo doesn't exceed its container's width */
+    height: 10%; /* Maintain the aspect ratio when resizing */
+    display: block; /* Ensure the logo is a block-level element */
+    margin: 0 auto; /* Center the logo horizontally in its container */
+}
+
+/* Apply background color to the logo */
+.logo-bg {
+    background-color: red; /* Change to your desired background color */
+    padding: 10px; /* Add padding to the logo if needed */
+}

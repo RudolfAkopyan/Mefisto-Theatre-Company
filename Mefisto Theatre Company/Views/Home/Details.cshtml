@@ -1,0 +1,72 @@
+﻿@model Mefisto_Theatre_Company.Models.Post
+@using Mefisto_Theatre_Company.Models
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>     
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePosted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePosted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEdited)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h3>Comments</h3>
+    @foreach (Comment comment in Model.Comments)
+    {
+        <p> @comment.User.UserName | @comment.Description | @comment.DatePosted </p>
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "AllPosts")
+</p>
